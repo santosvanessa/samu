@@ -1,12 +1,19 @@
 <!--The whole content below can be removed with the new code.-->
+<body>
+  <div id="mae">
 <div style="text-align:center" class="title">
-  <h1>{{title}}</h1>
+  <h1>{{uf.nome}}</h1>
 </div>
-<p>O ID do meu estado: {{minha_uf.id}}</p>
-<p>Área: {{minha_uf.area}}</p>
-<p>A média municípios atendidos: {{media}}</p>
+<div id="opa">
+<h3>O ID do meu estado: {{uf.id}}</h3>
+<h3>Área: {{uf.area}}</h3>
+<h3>A média municípios atendidos: {{media}}</h3>
+</div>
+<br>
 <ul>
-  <li *ngFor="let mun of municipios_atendidos">
+  <li *ngFor="let mun of munatendidos">
     Ano: {{mun.ano}} Quantidade: {{mun.valor}}
   </li>
 </ul>
+</div>
+</body>
