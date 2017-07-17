@@ -8,9 +8,11 @@ export class UFService {
   getAll(): UF[] {
     return UFs;
   }
-  getById(id: number): UF {
+
+  getById(id: number) {
     for(let uf of UFs){
       if(uf.id == id) return uf;
     }
-  }
+ }
+
 }
