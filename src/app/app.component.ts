@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
 import {UF} from './types/uf';
 import {UFService} from './services/uf.service'
-
 import {Dados} from './types/samu';
 import {SamuService} from './services/samu.service'
 
@@ -13,20 +11,31 @@ import {SamuService} from './services/samu.service'
   providers: [UFService, SamuService]
 })
 export class AppComponent implements OnInit {
-    uf: UF;
-    munatendidos: Dados[];
-    meuid= 52;
-    media: number;
+  title = '';
+  ufs : UF[];
+  dados_da_samu : Dados[];
+  minha_UF: UF;
+  munatendidos: Dados[] = [];
+  meuid = 52;
+  media: number;
 
     constructor(private ufService: UFService, private samuService: SamuService)
     {
 
     }
     ngOnInit(): void {
-        this.uf = this.ufService.getById(this.meuid);
-        this.munatendidos = this.samuService.getoMunicipiosAtendidosDoEstado(this.meuid);
-        this.media = this.calculomedia();
-    }
+     this.ufs = this.ufService.getAll();
+     this.minha_UF = this.ufService.getById(52);
+     this.munatendidos = this.samuService.getPorUFMunicipiosAtendidosPorEstado(this.minha_UF);
+     this.media = this.calculomedia();
+     this.title = this.defineTitle();
+     }
+
+     defineTitle(): string{
+       for(let uf of this.ufs){
+         if(uf.id == 52) return uf.nome;
+       }
+     }
 
     calculomedia(): number {
       var total = 0;

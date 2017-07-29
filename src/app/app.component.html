@@ -1,19 +1,9 @@
-<!--The whole content below can be removed with the new code.-->
-<body>
-  <div id="mae">
 <div style="text-align:center" class="title">
-  <h1>{{uf.nome}}</h1>
+  <h1>{{minha_UF.nome}}</h1>
+  <a routerLink="./resumo">Resumo</a>
+   <a routerLink="./dadosUF">Dados da UF</a>
+    <a routerLink="./todos">Todos os dados da UF</a>
+  <router-outlet>
+
+  </router-outlet>
 </div>
-<div id="opa">
-<h3>O ID do meu estado: {{uf.id}}</h3>
-<h3>Área: {{uf.area}}</h3>
-<h3>A média municípios atendidos: {{media}}</h3>
-</div>
-<br>
-<ul>
-  <li *ngFor="let mun of munatendidos">
-    Ano: {{mun.ano}} Quantidade: {{mun.valor}}
-  </li>
-</ul>
-</div>
-</body>
