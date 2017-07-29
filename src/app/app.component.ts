@@ -11,6 +11,7 @@ import {SamuService} from './services/samu.service'
   providers: [UFService, SamuService]
 })
 export class AppComponent implements OnInit {
+<<<<<<< HEAD
   title = '';
   ufs : UF[];
   dados_da_samu : Dados[];
@@ -18,12 +19,19 @@ export class AppComponent implements OnInit {
   munatendidos: Dados[] = [];
   meuid = 52;
   media: number;
+=======
+    munatendidos: Dados[];
+    media: number;
+    uf : UF;
+    meuid = 52;
+>>>>>>> 5f782e7f30c183ecb3d4f4461c37c183d73ee172
 
     constructor(private ufService: UFService, private samuService: SamuService)
     {
 
     }
     ngOnInit(): void {
+<<<<<<< HEAD
      this.ufs = this.ufService.getAll();
      this.minha_UF = this.ufService.getById(52);
      this.munatendidos = this.samuService.getPorUFMunicipiosAtendidosPorEstado(this.minha_UF);
@@ -37,6 +45,12 @@ export class AppComponent implements OnInit {
        }
      }
 
+=======
+        this.uf = this.ufService.getPorID(52);
+        this.munatendidos = this.samuService.getoMunicipiosAtendidosDoEstado(this.meuid);
+        this.media = this.calculomedia();
+    }
+>>>>>>> 5f782e7f30c183ecb3d4f4461c37c183d73ee172
     calculomedia(): number {
       var total = 0;
       for(let mun of this.munatendidos){
