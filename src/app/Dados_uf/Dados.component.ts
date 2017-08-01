@@ -6,33 +6,20 @@ import {SamuService} from '../services/samu.service';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './dados_UF.component.html',
+  templateUrl: './Dados_uf.component.html',
   styleUrls: ['../app.component.css']
 })
 
 export class dados_UFComponent implements OnInit {
-  ufs : UF[];
-  dados_da_samu : Dados[];
   minha_UF : UF;
-  munatendidos: Dados[] = [];
-  media : number;
+  munatendidos: Dados[];
 
-    constructor(private ufService: UFService, private samuService: SamuService)
-    { }
+ constructor(private ufService: UFService, private samuService: SamuService,
+   private location: Location) { }
 
-
-    ngOnInit(): void {
-        this.ufs = this.ufService.getAll();
-        this.minha_UF = this.ufService.getById(52);
-        this.munatendidos = this.samuService.getPorUFMunicipiosAtendidosPorEstado(this.minha_UF);
-        this.media = this.calculomedia();
-    }
-
-    calculomedia(): number {
-      var total = 0;
-      for(let mun of this.munatendidos){
-        total+=mun.valor;
-      }
-      return Math.round(total/this.munatendidos.length);
+ ngOnInit(): void {
+   this.ufService.getById(52)
+     .then(uf => this.samuService.getPorUFMunicipiosAtendidosPorEstado(uf))
+.then(municipios => this.munatendidos = municipios);
     }
 }

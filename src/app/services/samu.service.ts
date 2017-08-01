@@ -1,35 +1,31 @@
 import { Injectable } from '@angular/core';
 import { UF } from '../types/uf';
 import { Dados } from '../types/samu';
-import { VALORES } from './mock-samu_municipios_atendidos_por_estado';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/toPromise';
+
 
 
 @Injectable()
 export class SamuService {
-  getAllMunicipiosAtendidosPorEstado(): Dados[] {
-    return VALORES;
+  private samuUrl = 'https://samu.restlet.net/v1/valores/samu.json';  // URL to web api
+
+  constructor(private http: Http) { }
+
+  getAllMunicipiosAtendidosPorEstado(): Promise<Dados[]> {
+    return this.http.get(this.samuUrl)
+               .toPromise()
+               .then(response => response.json().valores as Dados[])
+               .catch(this.handleError);
   }
 
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error); // for demo purposes only
+    return Promise.reject(error.message || error);
+  }
 
-  getPorUFMunicipiosAtendidosPorEstado(uf: UF): Dados[]{
-    var total : Dados[] = [];
-    for(let mun of VALORES){
-      if(mun.uf_id == uf.id) total.push(mun);
-      }
-    return total;
-    }
-
-  getMunMedia(id: number): number {
-    let uf: UF;
-    let soma = 0;
-    let qtd = 0;
-    for (let entrada of VALORES){
-      if(entrada.uf_id === id)
-      {
-        soma += entrada.valor;
-        qtd++;
-      }
-    }
-    return soma/qtd;
-}
+  getPorUFMunicipiosAtendidosPorEstado(uf: UF): Promise<Dados[]>{
+    return this.getAllMunicipiosAtendidosPorEstado()
+    .then(municipios => municipios.filter(mun => mun.uf_id === uf.id))
+  }
 }

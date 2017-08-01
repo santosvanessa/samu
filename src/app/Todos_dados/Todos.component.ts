@@ -12,8 +12,6 @@ import {MetodoTodos} from '../services/Metodotodos.service'
   styleUrls: ['../app.component.css']
 })
 export class todosComponent implements OnInit {
- ufs : UF[];
- dados_da_samu : Dados[];
  minha_UF : UF;
  munatendidos: Dados[] = [];
  media : number;
@@ -26,11 +24,12 @@ export class todosComponent implements OnInit {
 
 
     ngOnInit(): void {
-        this.ufs = this.ufService.getAll();
-        this.minha_UF = this.ufService.getById(52);
-        this.munatendidos = this.samuService.getPorUFMunicipiosAtendidosPorEstado(this.minha_UF);
-        this.media = this.calculomedia();
-        this.dados = this.metodoTodos.unirDados();
+      /*this.metodoTodos.unirDados().then(dados => this.dados dados)
+
+      this.ufService.getById(52).then(uf => this.minha_UF = uf)
+        .then(uf => this.samuService.getPorUFMunicipiosAtendidosPorEstado(uf))
+        .then()
+         = ;*/
     }
     calculomedia(): number {
       var total = 0;

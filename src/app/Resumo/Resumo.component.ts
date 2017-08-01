@@ -6,15 +6,12 @@ import {SamuService} from '../services/samu.service';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './resumo.component.html',
+  templateUrl: './Resumo.component.html',
   styleUrls: ['../app.component.css']
 })
 
 export class ResumoComponent implements OnInit {
-  ufs : UF[];
-  dados_da_samu : Dados[];
   minha_UF : UF;
-  munatendidos: Dados[] = [];
   media : number;
 
     constructor(private ufService: UFService, private samuService: SamuService)
@@ -22,18 +19,16 @@ export class ResumoComponent implements OnInit {
 
 
     ngOnInit(): void {
-        this.ufs = this.ufService.getAll();
-        this.minha_UF = this.ufService.getById(52);
-        this.munatendidos = this.samuService.getPorUFMunicipiosAtendidosPorEstado(this.minha_UF);
-        this.media = this.calculomedia();
+      this.ufService.getById(52)
+        .then(uf => this.minha_UF = uf)
+        .then(uf => this.samuService.getPorUFMunicipiosAtendidosPorEstado(uf))
+        .then(municipios => this.media = this.calculomedia(municipios))
     }
 
 
-    calculomedia(): number {
+    calculomedia(munatendidos): number {
       var total = 0;
-      for(let mun of this.munatendidos){
-        total+=mun.valor;
-      }
-      return Math.round(total/this.munatendidos.length);
+      munatendidos.forEach(item => total += item.valor);
+      return Math.round(total/munatendidos.length);
     }
 }
