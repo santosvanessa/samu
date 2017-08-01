@@ -4,8 +4,6 @@ import { Dados } from '../types/samu';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
-
-
 @Injectable()
 export class SamuService {
   private samuUrl = 'https://samu.restlet.net/v1/valores/samu.json';  // URL to web api
@@ -20,7 +18,7 @@ export class SamuService {
   }
 
   private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
+    console.error('An error occurred', error); 
     return Promise.reject(error.message || error);
   }
 
