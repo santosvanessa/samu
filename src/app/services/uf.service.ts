@@ -1,29 +1,17 @@
 import { Injectable } from '@angular/core';
-import 'rxjs/add/operator/toPromise';
-import { Http } from '@angular/http';
+
 import { UF } from '../types/uf';
 import { UFs } from './mock-ufs';
 
 @Injectable()
 export class UFService {
-  private ufsUrl = 'api/ufs';  // URL to web api
+  getAll(): UF[] {
+    return UFs;
+  }
 
-  constructor(private http: Http) { }
-
-  getAll(): Promise<UF[]> {
-    return this.http.get(this.ufsUrl)
-             .toPromise()
-             .then(response => response.json().data as UF[])
-             .catch(this.handleError);
-           }
-
-private handleError(error: any): Promise<any> {
-  console.error('An error occurred', error); // for demo purposes only
-  return Promise.reject(error.message || error);
+  getById(id: number){
+    for(let uf of UFs){
+      if(uf.id == id) return uf;
 }
-
-  getById(id: number): Promise<UF>{
-    return this.getAll()
-      .then(ufs => ufs.find(uf => uf.id === id))
   }
 }

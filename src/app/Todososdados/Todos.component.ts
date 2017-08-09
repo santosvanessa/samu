@@ -8,25 +8,28 @@ import {MetodoTodos} from '../services/metodotodos.service'
 
 @Component({
   selector: 'app-root',
-  templateUrl: './Dados_uf.component.html',
+  templateUrl: './todos.component.html',
   styleUrls: ['../app.component.css']
 })
-
-export class Dados_UFComponent implements OnInit {
+export class todosComponent implements OnInit {
   ufs : UF[];
   dados_da_samu : Dados[];
   minha_UF : UF;
-  munatendidos: Dados[];
-  media : number;
+  munatendidos: Dados[] = [];
+  samu : Dados[];
   dados: DadoNome[];
+  media : number;
+
     constructor(private ufService: UFService, private samuService: SamuService, private metodoTodos: MetodoTodos)
     { }
+
 
     ngOnInit(): void {
         this.ufs = this.ufService.getAll();
         this.minha_UF = this.ufService.getById(52);
         this.munatendidos = this.samuService.getPorUFMunicipiosAtendidosPorEstado(this.minha_UF);
         this.media = this.calculomedia();
+        this.dados = this.metodoTodos.unirDados();
     }
 
     calculomedia(): number {

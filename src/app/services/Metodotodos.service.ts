@@ -25,7 +25,7 @@ constructor(private ufService: UFService) { }
       let dado : DadoNome = new DadoNome();
       dado.ano = item.ano;
       dado.valor = item.valor;
-      this.ufService.getById(item.uf_id).then(uf => dado.uf = uf);
+      dado.uf = this.ufService.getById(item.uf_id);
       dados_finais.push(dado);
     });
     return dados_finais;
