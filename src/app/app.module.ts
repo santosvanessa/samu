@@ -7,7 +7,7 @@ import { RouterModule }   from '@angular/router';
 import { Dados_UFComponent } from './Dados_uf/Dados.component';
 import { ResumoComponent } from './Resumo/Resumo.component';
 import { todosComponent } from './Todososdados/Todos.component';
-import { MetodoTodos } from './services/metodotodos.service'
+import { MetodoTodos } from './services/metodo-todos.service'
 
 @NgModule({
   declarations: [
