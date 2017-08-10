@@ -4,7 +4,7 @@ import {UFService} from '../services/uf.service'
 import {Dados} from '../types/samu';
 import {SamuService} from '../services/samu.service';
 import {DadoNome} from '../types/TodosDados';
-import {MetodoTodos} from '../services/metodotodos.service'
+import {MetodoTodos} from '../services/metodo-todos.service'
 
 @Component({
   selector: 'app-root',
